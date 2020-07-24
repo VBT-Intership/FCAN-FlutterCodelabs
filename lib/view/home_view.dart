@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterCodelabs/components/cards/list_card.dart';
+import 'package:flutterCodelabs/components/asymmetric/asymmetric.dart';
+
+import 'package:flutterCodelabs/model/products.dart';
+import 'package:flutterCodelabs/model/products_repository.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -14,6 +17,7 @@ class _HomeViewState extends State<HomeView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           title: Text("SHRINE"),
           leading: IconButton(
               icon: Icon(
@@ -39,14 +43,11 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 onPressed: () {
                   print("Filter button");
-                })
+                }),
           ],
         ),
-        body: GridView.count(
-            crossAxisCount: 2,
-            padding: EdgeInsets.all(16.0),
-            childAspectRatio: 8.0 / 9.0,
-            children: buildGridCards(context)),
+        body: AsymmetricView(
+            products: ProductsRepository.loadProducts(Category.all)),
       ),
     );
   }
